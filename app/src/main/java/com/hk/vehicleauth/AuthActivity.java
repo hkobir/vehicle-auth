@@ -29,10 +29,9 @@ public class AuthActivity extends AppCompatActivity {
 
         initView();
         binding.loginBtn.setOnClickListener(l -> {
-            if(userRole.equals("driver")) {
+            if (userRole.equals("driver")) {
                 checkDriver();
-            }
-            else{
+            } else {
                 checkOwner();
             }
         });
@@ -53,12 +52,13 @@ public class AuthActivity extends AppCompatActivity {
             default:
         }
     }
-    public void checkOwner(){
-        if(binding.emailET.getText().toString().trim().equals("")){
+
+    public void checkOwner() {
+        if (binding.emailET.getText().toString().trim().equals("")) {
             binding.emailET.setError("email is required");
             return;
         }
-        if(binding.passET.getText().toString().trim().equals("")){
+        if (binding.passET.getText().toString().trim().equals("")) {
             binding.passET.setError("password is required");
             return;
         }
@@ -67,34 +67,32 @@ public class AuthActivity extends AppCompatActivity {
                 binding.passET.getText().toString()
         );
     }
-    public void checkDriver(){
-        if(binding.vehicleIdET.getText().toString().trim().equals("")){
-            binding.vehicleIdET.setError("vehicle id is required");
+
+    public void checkDriver() {
+
+        if (binding.driverIdET.getText().toString().trim().equals("")) {
+            binding.driverIdET.setError("driver id is required");
             return;
         }
-        if(binding.driverIdET.getText().toString().trim().equals("")){
-            binding.vehicleIdET.setError("driver id is required");
-            return;
-        }
-        if(binding.passET.getText().toString().trim().equals("")){
+        if (binding.passET.getText().toString().trim().equals("")) {
             binding.passET.setError("password is required");
             return;
         }
         authDriver(
-                binding.vehicleIdET.getText().toString(),
-                binding.driverIdET.getText().toString()
+                binding.driverIdET.getText().toString(),
+                binding.passET.getText().toString()
         );
     }
 
-    public void authOwner(String email, String pass){
+    public void authOwner(String email, String pass) {
         hideKeyBoard();
-        startActivity(new Intent(this,OwnerActivity.class));
+        startActivity(new Intent(this, OwnerActivity.class));
         finish();
     }
 
-    private void authDriver(String vehicleId, String driverId) {
+    private void authDriver(String driverId, String password) {
         hideKeyBoard();
-        startActivity(new Intent(this,DriverActivity.class));
+        startActivity(new Intent(this, DriverActivity.class));
         finish();
     }
 
@@ -112,7 +110,7 @@ public class AuthActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == android.R.id.home)
+        if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
     }
