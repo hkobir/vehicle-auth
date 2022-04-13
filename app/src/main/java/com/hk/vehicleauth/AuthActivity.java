@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.hk.vehicleauth.databinding.ActivityAuthBinding;
 
@@ -97,6 +99,14 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void hideKeyBoard() {
+        View view = getCurrentFocus();
+        InputMethodManager im = (InputMethodManager) getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        try {
+            im.hideSoftInputFromWindow(view.getWindowToken(), 0); // make keyboard hide
+        } catch (NullPointerException e) {
+
+        }
 
     }
 
