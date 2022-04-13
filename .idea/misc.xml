@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.17222222222222222" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/drawable/button_back.xml" value="0.18518518518518517" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/drawable/cancel_button_back.xml" value="0.18981481481481483" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/drawable/circle_green_view.xml" value="0.22552083333333334" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/drawable/circle_image_back.xml" value="0.17222222222222222" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/drawable/circle_serial_view.xml" value="0.18981481481481483" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/drawable/ic_add_black_24dp.xml" value="0.18981481481481483" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/drawable/ic_green_signal.xml" value="0.17222222222222222" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/drawable/ic_image_black_24dp.xml" value="0.17222222222222222" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/drawable/icon_apps.xml" value="0.17222222222222222" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/activity_auth.xml" value="0.25" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/activity_driver.xml" value="0.25" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/activity_owner.xml" value="0.16" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/activity_splash.xml" value="0.18795289855072464" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/activity_user_role.xml" value="0.14" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/activity_vehicle_driver.xml" value="0.20516304347826086" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/add_item_dialog.xml" value="0.25" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/item_driver_vehicle.xml" value="0.2" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/item_layout_vehicle.xml" value="0.6584302325581395" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/item_vehicle_driver_layout.xml" value="0.25" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/item_vehicle_layout.xml" value="0.25" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/vehicle.xml" value="0.1933876811594203" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/layout/vehicle_list_dialog.xml" value="0.25" />
+        <entry key="..\:/Android Dev/Projects/VehicleAuth/app/src/main/res/menu/menu_vehicle_setting.xml" value="0.209375" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

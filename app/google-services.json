@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "288181621441",
+    "firebase_url": "https://automated-vehicle-detect-default-rtdb.firebaseio.com",
+    "project_id": "automated-vehicle-detect",
+    "storage_bucket": "automated-vehicle-detect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288181621441:android:a3348bc6bf18db1d3cba40",
+        "android_client_info": {
+          "package_name": "com.hk.vehicleauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288181621441-tuigt6mo44p14bhpmgljicdviq1r451d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBm1tLMPv6DLs2QfBt2Gx-L2xf6Q3d7VI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288181621441-tuigt6mo44p14bhpmgljicdviq1r451d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
