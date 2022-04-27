@@ -39,7 +39,7 @@ public class DriverActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (vehicles.get(position).getStatus().equals("null")) {
                     binding.vehicleIdTv.setText(
-                            vehicles.get(position).getId()
+                            vehicles.get(position).getCarNo()
                     );
                     Toast.makeText(DriverActivity.this,
                             "vehicle selected", Toast.LENGTH_SHORT).show();
@@ -75,19 +75,20 @@ public class DriverActivity extends AppCompatActivity {
 
     private ArrayList<Vehicle> generateVehicleList() {
         ArrayList<Vehicle> vehicleArrayList = new ArrayList<>();
-        Vehicle v1 = new Vehicle("1g2u55i8", "Tesla boom", "1ht56jj", "M Habib");
+        Vehicle v1 = new Vehicle(
+                "1g2u55i8", "Tesla boom", "1ht56jj", "M Habib","","");
         vehicleArrayList.add(v1);
 
-        Vehicle v2 = new Vehicle("1g0u57i8", "Tesla boom", "null", "k mahbub");
+        Vehicle v2 = new Vehicle("1g0u57i8", "Tesla boom", "null", "k mahbub","","");
         vehicleArrayList.add(v2);
 
-        Vehicle v3 = new Vehicle("122u95i8", "ToyoTa", "1ht56jj", "Mr. John");
+        Vehicle v3 = new Vehicle("122u95i8", "ToyoTa", "1ht56jj", "Mr. John","","");
         vehicleArrayList.add(v3);
 
-        Vehicle v4 = new Vehicle("1g1u35i8", "Marcedes", "null", "Rafa kerry");
+        Vehicle v4 = new Vehicle("1g1u35i8", "Marcedes", "null", "Rafa kerry","","");
         vehicleArrayList.add(v4);
 
-        Vehicle v5 = new Vehicle("1g2u15i8", "BMW", "1ht56jj", "M Jaman");
+        Vehicle v5 = new Vehicle("1g2u15i8", "BMW", "1ht56jj", "M Jaman","","");
         vehicleArrayList.add(v5);
         return vehicleArrayList;
     }

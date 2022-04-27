@@ -53,7 +53,7 @@ public class DriverVehicleAdapter extends BaseAdapter {
                 vehicle.getStatus().equals("null") ?
                         R.drawable.circle_green_view : R.drawable.circle_serial_view
         );
-        vehicleId.setText(vehicle.getId());
+        vehicleId.setText(vehicle.getCarNo());
         vehicleName.setText(vehicle.getName());
         ownerName.setText(vehicle.getOwnerName());
         return convertView;

@@ -1,24 +1,26 @@
 package com.hk.vehicleauth.models;
 
 public class Vehicle {
-    String id, name, status, ownerName;
+    String carNo, name, status, ownerNid, ownerName, expireDate;
 
     public Vehicle() {
     }
 
-    public Vehicle(String id, String name, String status, String ownerName) {
-        this.id = id;
+    public Vehicle(String carNo, String name, String status, String ownerNid, String ownerName, String expireDate) {
+        this.carNo = carNo;
         this.name = name;
         this.status = status;
+        this.ownerNid = ownerNid;
         this.ownerName = ownerName;
+        this.expireDate = expireDate;
     }
 
-    public String getId() {
-        return id;
+    public String getCarNo() {
+        return carNo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCarNo(String carNo) {
+        this.carNo = carNo;
     }
 
     public String getName() {
@@ -37,11 +39,27 @@ public class Vehicle {
         this.status = status;
     }
 
+    public String getOwnerNid() {
+        return ownerNid;
+    }
+
+    public void setOwnerNid(String ownerNid) {
+        this.ownerNid = ownerNid;
+    }
+
     public String getOwnerName() {
         return ownerName;
     }
 
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
+    }
+
+    public String getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(String expireDate) {
+        this.expireDate = expireDate;
     }
 }

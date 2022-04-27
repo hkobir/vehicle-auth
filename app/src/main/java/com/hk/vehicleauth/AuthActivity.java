@@ -10,12 +10,24 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hk.vehicleauth.databinding.ActivityAuthBinding;
+import com.hk.vehicleauth.models.Driver;
+import com.hk.vehicleauth.models.Owner;
+import com.hk.vehicleauth.utils.Common;
 
 public class AuthActivity extends AppCompatActivity {
     private ActivityAuthBinding binding;
     String userRole;
+    private DatabaseReference databaseReference;
+    private boolean authOwner;
+    private boolean authDriver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +35,7 @@ public class AuthActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_auth);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         if (getIntent() != null)
             userRole = getIntent().getStringExtra("message");
@@ -85,15 +98,77 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     public void authOwner(String email, String pass) {
+        authOwner = false;
         hideKeyBoard();
-        startActivity(new Intent(this, OwnerActivity.class));
-        finish();
+        binding.progressView.setVisibility(View.VISIBLE);
+        databaseReference.child("owners").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot pSnapshot : snapshot.getChildren()) {
+                        Owner owner = pSnapshot.getValue(Owner.class);
+                        if (email.equals(owner.getEmail()) && pass.equals(owner.getPass())) {
+                            authOwner = true;
+                            Common.currentOwner = owner;
+                            break;
+                        }
+                    }
+                    if (authOwner) {
+                        startActivity(new Intent(AuthActivity.this, OwnerActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(AuthActivity.this, "Invalid credential",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    binding.progressView.setVisibility(View.GONE);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void authDriver(String driverId, String password) {
+        authDriver = false;
         hideKeyBoard();
-        startActivity(new Intent(this, DriverActivity.class));
-        finish();
+        binding.progressView.setVisibility(View.VISIBLE);
+        databaseReference.child("drivers").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot pSnapshot : snapshot.getChildren()) {
+                        Driver driver = pSnapshot.getValue(Driver.class);
+                        if (driverId.equals(driver.getDriverId()) &&
+                                password.equals(driver.getPassword())) {
+                            authDriver = true;
+                            Common.currentDriver = driver;
+                            break;
+                        }
+                    }
+                    if (authDriver) {
+                        startActivity(new Intent(AuthActivity.this,
+                                DriverActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(AuthActivity.this, "Invalid credential",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    binding.progressView.setVisibility(View.GONE);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void hideKeyBoard() {
