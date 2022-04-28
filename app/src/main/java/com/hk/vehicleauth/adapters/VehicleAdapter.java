@@ -14,12 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hk.vehicleauth.R;
 import com.hk.vehicleauth.VehicleDriverActivity;
+import com.hk.vehicleauth.models.Vehicle;
+
+import java.util.List;
 
 public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.ViewHolder> {
     private Context context;
+    private List<Vehicle> vehicles;
 
     public VehicleAdapter(Context context) {
         this.context = context;
+    }
+    public void setVehicleList(List<Vehicle> vehicles){
+        this.vehicles = vehicles;
     }
 
     @NonNull
@@ -33,14 +40,10 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull VehicleAdapter.ViewHolder holder, int position) {
         holder.serialTv.setText(String.valueOf(position + 1));
-        String uId = java.util.UUID.randomUUID().toString();
-        holder.carNoTv.setText(uId.substring(0, 7));
-        if (position % 2 == 0)
-            holder.carNameTv.setText("Marcedes- Benz");
-        else if (position % 3 == 0)
-            holder.carNameTv.setText("BMW");
-        else
-            holder.carNameTv.setText("Tesla");
+       Vehicle vehicle = vehicles.get(position);
+        holder.carNoTv.setText(vehicle.getCarNo());
+
+            holder.carNameTv.setText(vehicle.getName());
 
         holder.carSetting.setOnClickListener(l -> {
             PopupMenu popupMenu = new PopupMenu(context, l);
@@ -48,7 +51,7 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.ViewHold
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case R.id.deleteItem:
-
+                        removeVehicle(vehicle);
                         break;
                     default:
                 }
@@ -57,13 +60,15 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.ViewHold
             popupMenu.show();
         });
         holder.itemView.setOnClickListener(v->{
-            context.startActivity(new Intent(context, VehicleDriverActivity.class));
+            Intent intent = new Intent(context, VehicleDriverActivity.class);
+            intent.putExtra("vId",vehicle.getCarNo());
+            context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return vehicles.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -77,5 +82,9 @@ public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.ViewHold
             carNoTv = itemView.findViewById(R.id.carNoTV);
             carSetting = itemView.findViewById(R.id.carIV);
         }
+    }
+
+    private void removeVehicle(Vehicle vehicle) {
+
     }
 }

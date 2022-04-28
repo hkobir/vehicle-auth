@@ -50,7 +50,7 @@ public class DriverVehicleAdapter extends BaseAdapter {
         AppCompatTextView ownerName = convertView.findViewById(R.id.menuTV);
 
         status.setBackgroundResource(
-                vehicle.getStatus().equals("null") ?
+                vehicle.getStatus().equals("free") ?
                         R.drawable.circle_green_view : R.drawable.circle_serial_view
         );
         vehicleId.setText(vehicle.getCarNo());
