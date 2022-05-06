@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hk.vehicleauth.adapters.DriverVehicleAdapter;
 import com.hk.vehicleauth.databinding.ActivityDriverBinding;
+import com.hk.vehicleauth.models.Driver;
 import com.hk.vehicleauth.models.Vehicle;
 import com.hk.vehicleauth.models.VehicleDriver;
 import com.hk.vehicleauth.utils.Common;
@@ -37,6 +38,7 @@ public class DriverActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private DatabaseReference databaseReference;
     private ProgressBar progressDialog;
+    private boolean authDriver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,39 +57,7 @@ public class DriverActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Vehicle cVehicle = vehicles.get(position);
                 if (cVehicle.getStatus().equals("free")) {
-                    binding.vehicleIdTv.setText(
-                            cVehicle.getCarNo()
-                    );
-                    progressDialog.setVisibility(View.VISIBLE);
-                    databaseReference.child("vehicleDrivers")
-                            .child(cVehicle.getCarNo())
-                            .child("currentDriver")
-                            .setValue(Common.currentDriver.getDriverId())
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    DataPreference.saveString(
-                                            DriverActivity.this,
-                                            Common.DRIVER_ID_KEY,
-                                            Common.currentDriver.getDriverId()
-                                    );
-                                    DataPreference.saveString(
-                                            DriverActivity.this,
-                                            Common.DRIVER_NAME_KEY,
-                                            Common.currentDriver.getName()
-                                    );
-                                    DataPreference.saveString(
-                                            DriverActivity.this,
-                                            Common.VEHICLE_KEY,
-                                            cVehicle.getName()
-                                    );
-
-                                    progressDialog.setVisibility(View.GONE);
-                                    Toast.makeText(DriverActivity.this,
-                                            "vehicle selected", Toast.LENGTH_SHORT).show();
-                                    dialog.dismiss();
-                                }
-                            });
+                    validateDriver(cVehicle);
                 } else {
                     Toast.makeText(DriverActivity.this,
                             "vehicle is not free", Toast.LENGTH_SHORT).show();
@@ -113,6 +83,71 @@ public class DriverActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void validateDriver(Vehicle vehicle) {
+        authDriver = false;
+        progressDialog.setVisibility(View.VISIBLE);
+        databaseReference.child("vehicleDrivers")
+                .child(vehicle.getCarNo())
+                .child("drivers")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            for (DataSnapshot pSnap : snapshot.getChildren()) {
+                                Driver driver = pSnap.getValue(Driver.class);
+                                if (driver.getDriverId().equals(Common.currentDriver.getDriverId())) {
+                                    authDriver = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        progressDialog.setVisibility(View.GONE);
+                    }
+                });
+        if (authDriver) {
+            binding.vehicleIdTv.setText(
+                    vehicle.getCarNo()
+            );
+            databaseReference.child("vehicleDrivers")
+                    .child(vehicle.getCarNo())
+                    .child("currentDriver")
+                    .setValue(Common.currentDriver.getDriverId())
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            DataPreference.saveString(
+                                    DriverActivity.this,
+                                    Common.DRIVER_ID_KEY,
+                                    Common.currentDriver.getDriverId()
+                            );
+                            DataPreference.saveString(
+                                    DriverActivity.this,
+                                    Common.DRIVER_NAME_KEY,
+                                    Common.currentDriver.getName()
+                            );
+                            DataPreference.saveString(
+                                    DriverActivity.this,
+                                    Common.VEHICLE_KEY,
+                                    vehicle.getName()
+                            );
+
+                            progressDialog.setVisibility(View.GONE);
+                            Toast.makeText(DriverActivity.this,
+                                    "vehicle selected", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    });
+        } else {
+            Toast.makeText(DriverActivity.this,
+                    "You are not permitted for this vehicle!", Toast.LENGTH_SHORT).show();
+            progressDialog.setVisibility(View.GONE);
+        }
     }
 
     private void loadProfile() {
